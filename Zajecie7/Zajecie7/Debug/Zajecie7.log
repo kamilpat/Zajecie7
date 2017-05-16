@@ -260,12 +260,12 @@ d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\colors.h(839): warning C4305: 'ini
 d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\colors.h(853): warning C4838: conversion from 'double' to 'const GLfloat' requires a narrowing conversion
 d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\colors.h(853): warning C4305: 'initializing': truncation from 'double' to 'const GLfloat'
 d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(84): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(93): warning C4305: '+=': truncation from 'double' to 'GLfloat'
-d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(154): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(155): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(156): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(157): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(258): warning C4244: '+=': conversion from 'double' to 'GLfloat', possible loss of data
-d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(260): warning C4244: '-=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(94): warning C4305: '+=': truncation from 'double' to 'GLfloat'
+d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(165): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(166): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(167): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(168): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(269): warning C4244: '+=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\zadanie7\opengl\zajecie7\zajecie7\zajecie7\zajecie7.cpp(271): warning C4244: '-=': conversion from 'double' to 'GLfloat', possible loss of data
   Zajecie7.vcxproj -> D:\Zadanie7\OpenGl\Zajecie7\Zajecie7\Debug\Zajecie7.exe
   Zajecie7.vcxproj -> D:\Zadanie7\OpenGl\Zajecie7\Zajecie7\Debug\Zajecie7.pdb (Full PDB)

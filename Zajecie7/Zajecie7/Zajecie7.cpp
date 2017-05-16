@@ -1,4 +1,4 @@
-// opengl_zbufor.cpp : Defines the entry point for the console application.
+ï»¿// opengl_zbufor.cpp : Defines the entry point for the console application.
 //
 
 #include "stdafx.h"
@@ -14,7 +14,7 @@ JanuszG@enter.net.pl
 #include <stdlib.h>
 #include "colors.h"
 
-// rozmiary bry³y obcinania
+// rozmiary bryÅ‚y obcinania
 
 const GLdouble left = -2.0;
 const GLdouble right = 2.0;
@@ -23,73 +23,74 @@ const GLdouble top = 2.0;
 const GLdouble near_ = 3.0;
 const GLdouble far_ = 7.0;
 
-// sta³e do obs³ugi menu podrêcznego
+// staÅ‚e do obsÅ‚ugi menu podrÄ™cznego
 
 enum
 {
-	CUTTING_PLANE, // p³aszczyzna przekroju
-	POLYGON_OFFSET, // przesuniêcie wartoœci g³êbi
-	EXIT // wyjœcie
+	CUTTING_PLANE, // pÅ‚aszczyzna przekroju
+	POLYGON_OFFSET, // przesuniÄ™cie wartoÅ›ci gÅ‚Ä™bi
+	EXIT // wyjÅ›cie
 };
 
-// k¹t obrotu kuli
+// kÄ…t obrotu kuli
 
 GLfloat angle = 0.0;
 
-// k¹ty obrotu szeœcianu
+// kÄ…ty obrotu szeÅ›cianu
 
 GLfloat rotatex = 0.0;
 GLfloat rotatey = 0.0;
 
-// wskaŸnik rysowania p³aszczyzna przekroju
+// wskaÅºnik rysowania pÅ‚aszczyzna przekroju
 
 bool cutting_plane = true;
 
-// wskaŸnik przesuniêcia wartoœci g³êbi
+// wskaÅºnik przesuniÄ™cia wartoÅ›ci gÅ‚Ä™bi
 
 bool polygon_offset = true;
 
-// wskaŸnik naciœniêcia lewego przycisku myszki
+// wskaÅºnik naciÅ›niÄ™cia lewego przycisku myszki
 
 int button_state = GLUT_UP;
 
-// po³o¿enie kursora myszki
+// poÅ‚oÅ¼enie kursora myszki
 
 int button_x, button_y;
 
-// funkcja generuj¹ca scenê 3D
+// funkcja generujÄ…ca scenÄ™ 3D
 
 void Display()
 {
-	// kolor t³a - zawartoœæ bufora koloru
+	// kolor tÅ‚a - zawartoÅ›Ä‡ bufora koloru
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 
-	// czyszczenie bufora koloru i bufora g³êbokoœci
+	// czyszczenie bufora koloru i bufora gÅ‚Ä™bokoÅ›ci
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// wybór macierzy modelowania
+	// wybÃ³r macierzy modelowania
 	glMatrixMode(GL_MODELVIEW);
 
 	// macierz modelowania = macierz jednostkowa
 	glLoadIdentity();
 
-	// przesuniêcie uk³adu wspó³rzêdnych szeœcianu do œrodka bry³y odcinania
+	// przesuniÄ™cie ukÅ‚adu wspÃ³Å‚rzÄ™dnych szeÅ›cianu do Å›rodka bryÅ‚y odcinania
 	glTranslatef(0, 0, -(near_ + far_) / 2);
 
-	// obroty szeœcianu
+	// obroty szeÅ›cianu
 	glRotatef(rotatex, 1.0, 0, 0);
 	glRotatef(rotatey, 0, 1.0, 0);
 
-	// niewielkie powiêkszenie szeœcianu
+	// niewielkie powiÄ™kszenie szeÅ›cianu
 	glScalef(1.15, 1.15, 1.15);
 
-	// w³¹czenie testu bufora g³êbokoœci
+	// wÅ‚Ä…czenie testu bufora gÅ‚Ä™bokoÅ›ci
 	glEnable(GL_DEPTH_TEST);
 
-	// najpierw rysujemy kulê obracaj¹c¹ siê wewn¹trz szeœcianu;
-	// z uwagi na celowy brak efektów oœwietlenia, obrót kuli
-	// podkreœla druga kula w wersji "szkieletowej"
+	// najpierw rysujemy kulÄ™ obracajÄ…cÄ… siÄ™ wewnÄ…trz szeÅ›cianu;
+	// z uwagi na celowy brak efektÃ³w oÅ›wietlenia, obrÃ³t kuli
+	// podkreÅ›la druga kula w wersji "szkieletowej"
 	glPushMatrix();
+	glTranslated(0, 0, 1); ////
 	angle += 0.2;
 	glRotatef(angle, 1.0, 1.0, 0.0);
 	glColor3fv(Yellow);
@@ -105,102 +106,112 @@ void Display()
 
 	glPopMatrix();
 
-	// w drugiej kolejnoœci rysujemy wnêtrze szeœcianu;
-	// rysowane s¹ tylko przednie strony wewnêtrznych œcian
-	// no i nie jest rysowana œciana przednia, w której bêdzie otwór
+	// w drugiej kolejnoÅ›ci rysujemy wnÄ™trze szeÅ›cianu;
+	// rysowane sÄ… tylko przednie strony wewnÄ™trznych Å›cian
+	// no i nie jest rysowana Å›ciana przednia, w ktÃ³rej bÄ™dzie otwÃ³r
 	glEnable(GL_CULL_FACE);
-	glBegin(GL_QUADS);
-	glColor3fv(Blue);
+	glBegin(GL_TRIANGLES);
+	/*glColor3fv(Blue);
 	glVertex3f(-1.0, -1.0, -1.0);
 	glVertex3f(1.0, -1.0, -1.0);
 	glVertex3f(1.0, 1.0, -1.0);
-	glVertex3f(-1.0, 1.0, -1.0);
+	*/
 
-	glColor3fv(Lime);
-	glVertex3f(-1.0, 1.0, 1.0);
-	glVertex3f(-1.0, -1.0, 1.0);
-	glVertex3f(-1.0, -1.0, -1.0);
-	glVertex3f(-1.0, 1.0, -1.0);
+	/*glColor3fv(Lime);
 
-	glColor3fv(Cyan);
-	glVertex3f(1.0, 1.0, 1.0);
-	glVertex3f(-1.0, 1.0, 1.0);
-	glVertex3f(-1.0, 1.0, -1.0);
-	glVertex3f(1.0, 1.0, -1.0);
+	glVertex3f(2.0, 0.0, 0.0);
+	glVertex3f(-2.0, 0.0, 0.0);
+	glVertex3f(0.0, 0.0, 2.0);*/
 
-	glColor3fv(Green);
-	glVertex3f(1.0, -1.0, 1.0);
-	glVertex3f(1.0, 1.0, 1.0);
-	glVertex3f(1.0, 1.0, -1.0);
-	glVertex3f(1.0, -1.0, -1.0);
+	//glColor3fv(Cyan);
+	//glVertex3f(1.0, 1.0, 0.0);
+	//glVertex3f(-1.0, 1.0, 0.0);
+	//glVertex3f(-1.0, 1.0, 2.0);
 
-	glColor3fv(Cyan);
-	glVertex3f(-1.0, -1.0, 1.0);
-	glVertex3f(1.0, -1.0, 1.0);
-	glVertex3f(1.0, -1.0, -1.0);
-	glVertex3f(-1.0, -1.0, -1.0);
+
+	//glColor3fv(Green);
+	//glVertex3f(1.0, -1.0, 0.0);
+	//glVertex3f(1.0, 1.0, 0.0);
+	//glVertex3f(1.0, 1.0, 2.0);
+
+
+	//glColor3fv(Cyan);
+	//glVertex3f(-1.0, -1.0, 0.0);
+	//glVertex3f(1.0, -1.0, 0.0);
+	//glVertex3f(1.0, -1.0, 2.0);
+	//
+	//glColor3fv(Yellow);
+	//glVertex3f(-1.0, -1.0, -1.0);
+	//glVertex3f(1.0, -1.0, -1.0);
+	//glVertex3f(1.0, 1.0, -1.0);
+
+	//glColor3fv(Purple);
+	//glVertex3f(-1.0, -1.0, -1.0);
+	//glVertex3f(1.0, -1.0, -1.0);
+	//glVertex3f(1.0, 1.0, -1.0);
+
 	glEnd();
 	glDisable(GL_CULL_FACE);
 
-	// rysowanie p³aszczyzny otworu w szeœcianie
+	// rysowanie pÅ‚aszczyzny otworu w szeÅ›cianie
 	if (cutting_plane)
 	{
-		// wy³¹czenie rysowania w buforze kolorów
+		// wyÅ‚Ä…czenie rysowania w buforze kolorÃ³w
 		glDrawBuffer(GL_NONE);
 
-		// rysowanie kwadratu czêœciowo ods³aniaj¹cego wnêtrze szeœcianu
-		// (kwadrat jest po³o¿ony o 0,001 jednostki nad bokiem szeœcianu)
+		// rysowanie kwadratu czÄ™Å›ciowo odsÅ‚aniajÄ…cego wnÄ™trze szeÅ›cianu
+		// (kwadrat jest poÅ‚oÅ¼ony o 0,001 jednostki nad bokiem szeÅ›cianu)
 		glBegin(GL_QUADS);
-		glVertex3f(-0.6, -0.6, 1.001);
-		glVertex3f(0.6, -0.6, 1.001);
-		glVertex3f(0.6, 0.6, 1.001);
-		glVertex3f(-0.6, 0.6, 1.001);
+		glVertex3f(-0.6, -0.6, 0.001);
+		glVertex3f(0.6, -0.6, 0.001);
+		glVertex3f(0.6, 0.6, 0.001);
+		glVertex3f(-0.6, 0.6, 0.001);
 		glEnd();
 
-		// w³¹czenie rysowania w buforze kolorów
+		// wÅ‚Ä…czenie rysowania w buforze kolorÃ³w
 		glDrawBuffer(GL_BACK);
 	}
 
-	// w³aœciwy szeœcian z obramowaniem, którego rysowanie wymusza brak oœwietlenia
+	// wÅ‚aÅ›ciwy szeÅ›cian z obramowaniem, ktÃ³rego rysowanie wymusza brak oÅ›wietlenia
 	glColor3fv(Red);
 	if (polygon_offset)
 		glEnable(GL_POLYGON_OFFSET_FILL);
 
 	glPolygonOffset(1.0, 1.0);
-	glutSolidCube(2.0);
+	glutSolidCone(2.0,2.0,7,7);
 	glColor3fv(Black);
-	glutWireCube(2.0);
+	glutWireCone(2.0, 2.0, 7, 7);
 	if (polygon_offset)
 		glDisable(GL_POLYGON_OFFSET_FILL);
 
-	// skierowanie poleceñ do wykonania
+	// skierowanie poleceÅ„ do wykonania
 	glFlush();
 
-	// zamiana buforów koloru
+	// zamiana buforÃ³w koloru
 	glutSwapBuffers();
 }
 
-// zmiana wielkoœci okna
+// zmiana wielkoÅ›ci okna
 
 void Reshape(int width, int height)
 {
-	// obszar renderingu - ca³e okno
+	// obszar renderingu - caÅ‚e okno
 	glViewport(0, 0, width, height);
 
-	// wybór macierzy rzutowania
+	// wybÃ³r macierzy rzutowania
 	glMatrixMode(GL_PROJECTION);
 
 	// macierz rzutowania = macierz jednostkowa
 	glLoadIdentity();
 
-	// parametry bry³y obcinania
+	// parametry bryÅ‚y obcinania
 	glFrustum(left, right, bottom, top, near_, far_);
 
 	// generowanie sceny 3D
 	Display();
 }
 
-// obs³uga klawiszy funkcyjnych i klawiszy kursora
+// obsÅ‚uga klawiszy funkcyjnych i klawiszy kursora
 
 void SpecialKeys(int key, int x, int y)
 {
@@ -211,7 +222,7 @@ void SpecialKeys(int key, int x, int y)
 		rotatey -= 1;
 		break;
 
-		// kursor w górê
+		// kursor w gÃ³rÄ™
 	case GLUT_KEY_UP:
 		rotatex -= 1;
 		break;
@@ -221,7 +232,7 @@ void SpecialKeys(int key, int x, int y)
 		rotatey += 1;
 		break;
 
-		// kursor w dó³
+		// kursor w dÃ³Å‚
 	case GLUT_KEY_DOWN:
 		rotatex += 1;
 		break;
@@ -231,16 +242,16 @@ void SpecialKeys(int key, int x, int y)
 	Reshape(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 }
 
-// obs³uga przycisków myszki
+// obsÅ‚uga przyciskÃ³w myszki
 
 void MouseButton(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON)
 	{
-		// zapamiêtanie stanu lewego przycisku myszki
+		// zapamiÄ™tanie stanu lewego przycisku myszki
 		button_state = state;
 
-		// zapamiêtanie po³o¿enia kursora myszki
+		// zapamiÄ™tanie poÅ‚oÅ¼enia kursora myszki
 		if (state == GLUT_DOWN)
 		{
 			button_x = x;
@@ -249,7 +260,7 @@ void MouseButton(int button, int state, int x, int y)
 	}
 }
 
-// obs³uga ruchu kursora myszki
+// obsÅ‚uga ruchu kursora myszki
 
 void MouseMotion(int x, int y)
 {
@@ -263,25 +274,25 @@ void MouseMotion(int x, int y)
 	}
 }
 
-// obs³uga menu podrêcznego
+// obsÅ‚uga menu podrÄ™cznego
 
 void Menu(int value)
 {
 	switch (value)
 	{
-		// p³aszczyzna przekroju
+		// pÅ‚aszczyzna przekroju
 	case CUTTING_PLANE:
 		cutting_plane = !cutting_plane;
 		Display();
 		break;
 
-		// przesuniêcie wartoœci g³êbi
+		// przesuniÄ™cie wartoÅ›ci gÅ‚Ä™bi
 	case POLYGON_OFFSET:
 		polygon_offset = !polygon_offset;
 		Display();
 		break;
 
-		// wyjœcie
+		// wyjÅ›cie
 	case EXIT:
 		exit(0);
 	}
@@ -295,37 +306,37 @@ int main(int argc, char * argv[])
 	// inicjalizacja bufora ramki
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
-	// rozmiary g³ównego okna programu
+	// rozmiary gÅ‚Ã³wnego okna programu
 	glutInitWindowSize(500, 500);
 
-	// utworzenie g³ównego okna programu
+	// utworzenie gÅ‚Ã³wnego okna programu
 	glutCreateWindow("Z-bufor");
 
-	// do³¹czenie funkcji generuj¹cej scenê 3D
+	// doÅ‚Ä…czenie funkcji generujÄ…cej scenÄ™ 3D
 	glutDisplayFunc(Display);
 
-	// do³¹czenie funkcji wywo³ywanej przy zmianie rozmiaru okna
+	// doÅ‚Ä…czenie funkcji wywoÅ‚ywanej przy zmianie rozmiaru okna
 	glutReshapeFunc(Reshape);
 
-	// do³¹czenie funkcji obs³ugi klawiszy funkcyjnych i klawiszy kursora
+	// doÅ‚Ä…czenie funkcji obsÅ‚ugi klawiszy funkcyjnych i klawiszy kursora
 	glutSpecialFunc(SpecialKeys);
 
-	// obs³uga przycisków myszki
+	// obsÅ‚uga przyciskÃ³w myszki
 	glutMouseFunc(MouseButton);
 
-	// obs³uga ruchu kursora myszki
+	// obsÅ‚uga ruchu kursora myszki
 	glutMotionFunc(MouseMotion);
 
-	// utworzenie menu podrêcznego
+	// utworzenie menu podrÄ™cznego
 	glutCreateMenu(Menu);
 
-	// menu g³ówne
+	// menu gÅ‚Ã³wne
 	glutCreateMenu(Menu);
 #ifdef WIN32
 
-	glutAddMenuEntry("P³aszczyzna przekroju: rysowana/nierysowana", CUTTING_PLANE);
-	glutAddMenuEntry("Przesuniêcie wartoœci g³êbi: w³¹cz/wy³¹cz", POLYGON_OFFSET);
-	glutAddMenuEntry("Wyjœcie", EXIT);
+	glutAddMenuEntry("PÅ‚aszczyzna przekroju: rysowana/nierysowana", CUTTING_PLANE);
+	glutAddMenuEntry("PrzesuniÄ™cie wartoÅ›ci gÅ‚Ä™bi: wÅ‚Ä…cz/wyÅ‚Ä…cz", POLYGON_OFFSET);
+	glutAddMenuEntry("WyjÅ›cie", EXIT);
 #else
 
 	glutAddMenuEntry("Plaszczyzna przekroju: rysowana/nierysowana", CUTTING_PLANE);
@@ -333,13 +344,13 @@ int main(int argc, char * argv[])
 	glutAddMenuEntry("Wyjscie", EXIT);
 #endif
 
-	// okreœlenie przycisku myszki obs³uguj¹cej menu podrêczne
+	// okreÅ›lenie przycisku myszki obsÅ‚ugujÄ…cej menu podrÄ™czne
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
-	// do³¹czenie funkcji wywo³ywanej podczas "bezczynnoœci" systemu
+	// doÅ‚Ä…czenie funkcji wywoÅ‚ywanej podczas "bezczynnoÅ›ci" systemu
 	glutIdleFunc(Display);
 
-	// wprowadzenie programu do obs³ugi pêtli komunikatów
+	// wprowadzenie programu do obsÅ‚ugi pÄ™tli komunikatÃ³w
 	glutMainLoop();
 	return 0;
 }
